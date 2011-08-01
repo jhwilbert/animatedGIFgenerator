@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<style>
+		* { outline: 0; border: 0; }
+		iframe {
+            width: 100%;
+            height: 490px;
+            overflow: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="../_frame/static/js/jquery.latest.js"></script> 
+</head>
+
+<body>
+	<div>
+		<strong>banner - leaderboard</strong>
+		<br/>
+		<img src="<url>index.php/banner/1/rerome?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/1/rerome?artwork=<artwork>&albumid=2"/>
+		<img src="<url>index.php/banner/1/RomansDobz?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/1/RomansDobzan?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/1/RomansDobzansk?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/1/RomansDobzanskis?artwork=<artwork>"/>
+		<br/><br/>
+		<strong>banner - leaderboard</strong>
+		<br/>
+		<img src="<url>index.php/banner/2/rerome?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/2/rerome?artwork=<artwork>&albumid=2"/>
+		<img src="<url>index.php/banner/2/RomansDobz?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/2/RomansDobzan?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/2/RomansDobzansk?artwork=<artwork>"/>
+		<img src="<url>index.php/banner/2/RomansDobzanskis?artwork=<artwork>"/>
+		<br/><br/>
+		<strong>poster - PDF</strong>
+		<br/>
+		<a href="<url>index.php/poster/rerome?artwork=<artwork>" target="_blank">rerome</a>
+		<a href="<url>index.php/poster/rerome?artwork=<artwork>&albumid=2" target="_blank">rerome/2</a>
+		<a href="<url>index.php/poster/RomansDobz?artwork=<artwork>" target="_blank">RomansDobz</a>
+		<a href="<url>index.php/poster/RomansDobzan?artwork=<artwork>" target="_blank">RomansDobzan</a>
+		<a href="<url>index.php/poster/RomansDobzansk?artwork=<artwork>" target="_blank">RomansDobzansk</a>
+		<a href="<url>index.php/poster/RomansDobzanskis?artwork=<artwork>" target="_blank">RomansDobzanskis</a>
+	
+		<br/><br/>
+		<strong>iframe</strong>
+		<br/>
+		<iframe scrolling="no"></iframe>
+	</div>
+	
+	<script>
+			var R = R || (function() {
+				var R = {
+					DEBUG: location.href.indexOf('http://localhost:8') != -1 ? true : false,
+					getParameterMap: function() { var m = {}, h, s = new RegExp('[?][^#]+').exec(window.location.href), hs = (s == null ? "" : ("" + s).replace('?', '')).split('&'); for (var i = 0; i < hs.length; i++) { h = hs[i].split('='); if(h.length > 1) m[h[0]] = h[1]; } return m; },
+					getParameter: function(k) { return this.getParameterMap()[k]; },
+					log: function() { if(this.DEBUG && window.console) console.log.apply(console, arguments); return this; },
+					URL: 'http://www.kaiserchiefs.com/album/'
+				};
+				R.SERVICE = location.protocol + '//' + location.host + (R.DEBUG ? '/futureismedieval/' : '/');
+				return R;
+			})();
+				
+			$(function() {
+				var artwork = R.getParameter("artwork");
+				
+				if(artwork) {
+					$('iframe').attr('src', R.SERVICE + '_frame/index.html?username=rerome&albumid=2&artwork=' + artwork + '&fadein=1000');
+					
+					$('img').each(function(k,v){
+						$(v).attr('src', $(v).attr('src').replace(/<url>/i, R.SERVICE).replace(/<artwork>/i, artwork));
+					});
+					
+					$('a').each(function(k,v){
+						$(v).attr('href', $(v).attr('href').replace(/<url>/i, R.SERVICE).replace(/<artwork>/i, artwork));
+					});
+				} else {
+					$('body')
+					.children('div').hide().end()
+					.prepend('<br/><br/>')
+					.prepend($('<strong/>', {text: 'Parameter missing: artwork=<URL>'}));
+				}
+				
+			});
+	</script>
+
+</body>
+
+</html>
+
+

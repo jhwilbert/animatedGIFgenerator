@@ -1,0 +1,54 @@
+
+Custom Banner Creation Tool
+----------------------------
+
+Dynamic animated GIF creator. The tool was developed to created animated GIFs and PDF files with custom design and animations were dynamically created from any image provided by the user. The code has been edited for general purpose. It takes a username and image path as inputs and generates a PDF poster and animated GIF as outputs.
+
+The tool was developed by Joao Wilbert and Romans Dobzanskis in 2011.
+
+
+Installation
+--------------
+
+1.  Install the Tool
+Copy the entire CodeIgniter framework folder into your localhost. The banner and poster handlers are implemented as two controllers. When creating banners, the system will output an animated GIF file that will be created in the folder /_generated/banner/ and when implementing posters it outputs a PDF in /_generated/poster/
+
+2. Download and drag TCPDF to Application/Libraries/tcpdf/
+
+Version: 5.9.082_PHP4
+Release date: 2011-05-22
+Author:	Nicola Asuni
+
+http:  www.tcpdf.org
+http:  www.sourceforge.net/projects/tcpdf
+
+Banner Generation:
+-----------------
+Request:
+http://[localhost]/bannergenerator/index.php/banner/[format]/[text]/?[background]=http://image.jpg
+
+Properties:
+[format] = switch between 1 and 0 to change the banner format from fullbanner to button.
+[username] = receives a string to print the username or any other text into banner.
+[artwork] = receives a string with the absolute path of the artwork that will be used in the banner
+
+Sample request:
+http://localhost:8888/bannergenerator/index.php/banner/1/mytext/?background=http://localhost:8888/_test/image.jpg
+
+Poster Generation:
+-----------------
+Request:
+http://[localhost]/bannergenerator/index.php/poster/[mytext]/?[artwork]=http://image.jpg
+
+Properties:
+[format] = switch between 1 and 0 to change the banner format from fullbanner to button.
+[text] = receives a string to print the username or any other text into banner.
+[image] = receives a string with the absolute path of the artwork that will be used in the banner
+
+Sample request:
+http://localhost:8888/bannergenerator/index.php/poster/mytext/?artwork=http://localhost:8888/_test/image.jpg
+
+Dependencies
+--------------
+
+Bannergenerator Tool uses Codeigniter and tcpdf for PDF output.
